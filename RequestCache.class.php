@@ -35,6 +35,15 @@
         protected static $_reads = 0;
 
         /**
+         * _store
+         * 
+         * @var array
+         * @access protected
+         * @static
+         */
+        protected static $_store = array();
+
+        /**
          * _writes. Number of request-level cache writes/sets.
          * 
          * (default value: 0)
@@ -54,7 +63,7 @@
          */
         public static function flush()
         {
-            unset($GLOBALS['cache']);
+            self::$_store = array();
         }
 
         /**
@@ -125,14 +134,14 @@
         public static function read($key)
         {
             // record not found
-            if (isset($GLOBALS['cache'][$key]) === false) {
+            if (isset(self::$_store[$key]) === false) {
                 ++self::$_misses;
                 return null;
             }
 
             // statistic incrementation and value returning
             ++self::$_reads;
-            return $GLOBALS['cache'][$key];
+            return self::$_store[$key];
         }
 
         /**
@@ -147,11 +156,6 @@
          */
         public static function write($key, $value)
         {
-            // namespace-setup
-            if (isset($GLOBALS['cache']) === false) {
-                $GLOBALS['cache'] = array();
-            }
-
             // null value attempting to be stored
             if ($value === null) {
                 throw new Exception(
@@ -162,7 +166,7 @@
 
             // statistic incrementation and cache-writing
             ++self::$_writes;
-            $GLOBALS['cache'][$key] = $value;
+            self::$_store[$key] = $value;
         }
     }
 
