@@ -1,38 +1,28 @@
 <?php
 
     /**
-     * Abstract RequestCache class. Provides accessors for reading, writing and
-     *     flushing a request-level cache/data-store.
+     * RequestCache
      * 
-     * @todo implement prefixing
-     * @note doesn't need to take false-value storage into consideration as
-     *     APCCache does, since false value can be stored in RequestCache
-     *     data-store natively
+     * Provides accessors for reading, writing and flushing a request-level
+     * cache/data-store.
+     * 
+     * @author   Oliver Nassar <onassar@gmail.com>
+     * @todo     implement key prefixing
      * @abstract
      */
     abstract class RequestCache
     {
         /**
-         * _misses. Number of failed request-level cache reads/hits.
+         * _analytics. Cache request/writing statistics array.
          * 
-         * (default value: 0)
-         * 
-         * @var int
+         * @var array
          * @access protected
-         * @static
          */
-        protected static $_misses = 0;
-
-        /**
-         * _reads. Number of successful request-level cache reads/hits.
-         * 
-         * (default value: 0)
-         * 
-         * @var int
-         * @access protected
-         * @static
-         */
-        protected static $_reads = 0;
+        protected static $_analytics = array(
+            'misses' => 0,
+            'reads' => 0,
+            'writes' => 0
+        );
 
         /**
          * _store
@@ -42,17 +32,6 @@
          * @static
          */
         protected static $_store = array();
-
-        /**
-         * _writes. Number of request-level cache writes/sets.
-         * 
-         * (default value: 0)
-         * 
-         * @var int
-         * @access protected
-         * @static
-         */
-        protected static $_writes = 0;
 
         /**
          * flush function. Empties request-level cache records.
@@ -76,7 +55,7 @@
          */
         public static function getMisses()
         {
-            return self::$_misses;
+            return self::$_analytics['missed'];
         }
 
         /**
@@ -89,7 +68,7 @@
          */
         public static function getReads()
         {
-            return self::$_reads;
+            return self::$_analytics['reads'];
         }
 
         /**
@@ -102,11 +81,7 @@
          */
         public static function getStats()
         {
-            return array(
-                'misses' => self::$_misses,
-                'reads' => self::$_reads,
-                'writes' => self::$_writes
-            );
+            return self::$_analytics;
         }
 
         /**
@@ -119,7 +94,7 @@
          */
         public static function getWrites()
         {
-            return self::$_writes;
+            return self::$_analytics['writes'];
         }
 
         /**
@@ -135,12 +110,12 @@
         {
             // record not found
             if (isset(self::$_store[$key]) === false) {
-                ++self::$_misses;
+                ++self::$_analytics['misses'];
                 return null;
             }
 
             // statistic incrementation and value returning
-            ++self::$_reads;
+            ++self::$_analytics['reads'];
             return self::$_store[$key];
         }
 
@@ -165,9 +140,7 @@
             }
 
             // statistic incrementation and cache-writing
-            ++self::$_writes;
+            ++self::$_analytics['writes'];
             self::$_store[$key] = $value;
         }
     }
-
-?>
