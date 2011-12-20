@@ -9,6 +9,14 @@
      * @author   Oliver Nassar <onassar@gmail.com>
      * @todo     implement key prefixing
      * @abstract
+     * @example
+     * <code>
+     *     require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
+     *     if (is_null(RequestCache::read('key'))) {
+     *         RequestCache::write('key', 'oliver');
+     *         echo RequestCache::read('key');
+     *     }
+     * </code>
      */
     abstract class RequestCache
     {
