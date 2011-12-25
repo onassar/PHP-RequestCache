@@ -12,18 +12,22 @@
      * @example
      * <code>
      *     require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
-     *     if (is_null(RequestCache::read('key'))) {
+     *     $key = RequestCache::read('key');
+     *     if (is_null($key)) {
      *         RequestCache::write('key', 'oliver');
-     *         echo RequestCache::read('key');
+     *         $key = RequestCache::read('key');
      *     }
+     *     echo $key;
      * </code>
      */
     abstract class RequestCache
     {
         /**
-         * _analytics. Cache request/writing statistics array.
+         * _analytics
          * 
-         * @var array
+         * Cache request/writing statistics array.
+         * 
+         * @var    array
          * @access protected
          */
         protected static $_analytics = array(
@@ -35,14 +39,16 @@
         /**
          * _store
          * 
-         * @var array
+         * @var    array
          * @access protected
          * @static
          */
         protected static $_store = array();
 
         /**
-         * flush function. Empties request-level cache records.
+         * flush
+         * 
+         * Empties request-level cache records.
          * 
          * @access public
          * @static
@@ -54,8 +60,9 @@
         }
 
         /**
-         * getMisses function. Returns the number of request-level missed cache
-         *     reads.
+         * getMisses
+         * 
+         * Returns the number of request-level missed cache reads.
          * 
          * @access public
          * @static
@@ -67,8 +74,9 @@
         }
 
         /**
-         * getReads function. Returns the number of request-level successful
-         *     cache reads.
+         * getReads
+         * 
+         * Returns the number of request-level successful cache reads.
          * 
          * @access public
          * @static
@@ -80,8 +88,10 @@
         }
 
         /**
-         * getStats function. Returns an associative array of request-level
-         *     cache performance statistics.
+         * getStats
+         * 
+         * Returns an associative array of request-level cache performance
+         * statistics.
          * 
          * @access public
          * @static
@@ -93,8 +103,9 @@
         }
 
         /**
-         * getWrites function. Returns the number of successful request-level
-         *     cache writes.
+         * getWrites
+         * 
+         * Returns the number of successful request-level cache writes.
          * 
          * @access public
          * @static
@@ -106,12 +117,14 @@
         }
 
         /**
-         * read function. Attempts to read a request-level cache record,
-         *     returning null if it couldn't be accessed.
+         * read
+         * 
+         * Attempts to read a request-level cache record, returning null if it
+         * couldn't be accessed.
          * 
          * @access public
          * @static
-         * @param string $key
+         * @param  string $key
          * @return mixed cache record value, or null if it couldn't be retrieved
          */
         public static function read($key)
@@ -128,13 +141,15 @@
         }
 
         /**
-         * write function. Writes a value to the request-level cache, based on
-         *     the passed in key.
+         * write
+         * 
+         * Writes a value to the request-level cache, based on the passed in
+         * key.
          * 
          * @access public
          * @static
-         * @param string $key
-         * @param mixed $value
+         * @param  string $key
+         * @param  mixed $value
          * @return void
          */
         public static function write($key, $value)
