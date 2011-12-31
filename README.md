@@ -10,7 +10,7 @@ request.
  - *read* Read data from the cache, determined by the key passed in
  - *write* Write data to the cache, identified by the key passed in
 
-### Sample REad
+### Sample Read
 
     require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
     $key = RequestCache::read('key');
