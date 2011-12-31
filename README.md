@@ -6,11 +6,13 @@ wrapper for reading, writing, flushing and analyzing data stored throughout the
 request.
 
 ### Methods
- - **flush**
+**flush**
 Clear the request cache
- - **read**
+
+**read**
 Read data from the cache, determined by the key passed in
- - **write**
+
+**write**
 Write data to the cache, identified by the key passed in
 
 ### Sample Read
