@@ -18,6 +18,7 @@
      *         $key = RequestCache::read('key');
      *     }
      *     echo $key;
+     *     exit(0);
      * </code>
      */
     abstract class RequestCache
@@ -66,7 +67,7 @@
          * 
          * @access public
          * @static
-         * @return int
+         * @return integer
          */
         public static function getMisses()
         {
@@ -80,7 +81,7 @@
          * 
          * @access public
          * @static
-         * @return int
+         * @return integer
          */
         public static function getReads()
         {
@@ -109,7 +110,7 @@
          * 
          * @access public
          * @static
-         * @return int
+         * @return integer
          */
         public static function getWrites()
         {
