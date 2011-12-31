@@ -12,9 +12,14 @@ request.
 
 ### Sample Read
 
+    // class inclusions
     require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
+
+    // attempt to ready key
     $key = RequestCache::read('key');
     if (is_null($key)) {
+
+        // write value; read
         RequestCache::write('key', 'oliver');
         $key = RequestCache::read('key');
     }
