@@ -12,6 +12,9 @@ request.
 
 ### Sample Read
 
+``` php
+<?php
+
     // class inclusions
     require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
 
@@ -25,3 +28,5 @@ request.
     }
     echo $key;
     exit(0);
+
+```
