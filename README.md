@@ -1,9 +1,11 @@
 PHP Request Cache
 ===
 
-PHP-RequestCache contains the abstract class **RequestCache**, which acts as a
-wrapper for reading, writing, flushing and analyzing data stored throughout the
-request.
+PHP-RequestCache contains the abstract `RequestCache` class, which acts as a
+wrapper for reading, writing, See
+[PHP-APCCache](https://github.com/onassar/PHP-APCCache) and
+[PHP-MemcachedCache](https://github.com/onassar/PHP-MemcachedCache)
+for more robust caching systems.
 
 ### Methods
  - **flush** Clear the request cache
