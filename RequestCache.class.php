@@ -130,46 +130,62 @@
          * 
          * @access public
          * @static
-         * @param  string $key
          * @return mixed cache record value, or null if it couldn't be retrieved
          */
-        public static function read($key)
+        public static function read()
         {
-            // record not found
-            if (isset(self::$_store[$key]) === false) {
-                ++self::$_analytics['misses'];
-                return null;
+            $keys = func_get_args();
+            $reference = &self::$_store;
+            foreach ($keys as $key) {
+                if (!isset($reference[$key])) {
+                    ++self::$_analytics['misses'];
+                    return null;
+                }
+                $reference = &$reference[$key];
             }
 
             // statistic incrementation and value returning
             ++self::$_analytics['reads'];
-            return self::$_store[$key];
+            return $reference;
         }
 
         /**
          * write
          * 
          * Writes a value to the request-level cache, based on the passed in
-         * key.
+         * key(s).
          * 
          * @access public
          * @static
-         * @param  string $key
-         * @param  mixed $value
          * @return void
          */
-        public static function write($key, $value)
+        public static function write()
         {
+            // presume that the value is the last argument passed in
+            $args = func_get_args();
+            $keys = &$args;
+            $value = array_pop($args);
+            $lastKey = array_pop($args);
+
             // null value attempting to be stored
             if ($value === null) {
                 throw new Exception(
                     'Cannot perform RequestCache write: attempting to store' .
-                    'null value for key *' . ($key) . '*.'
+                    'null value.'
                 );
+            }
+
+            // child-keys
+            $reference = &self::$_store;
+            foreach ($keys as $key) {
+                if (!isset($reference[$key])) {
+                    $reference[$key] = array();
+                }
+                $reference = &$reference[$key];
             }
 
             // statistic incrementation and cache-writing
             ++self::$_analytics['writes'];
-            self::$_store[$key] = $value;
+            $reference[$lastKey] = $value;
         }
     }
