@@ -12,7 +12,7 @@ for more robust caching systems.
  - **read** Read data from the cache, determined by the key(s) passed in
  - **write** Write data to the cache, identified by the key(s) passed in
 
-### Sample Read
+### Simple Sample Read/Write
 
 ``` php
 <?php
@@ -29,6 +29,28 @@ for more robust caching systems.
         $key = RequestCache::read('key');
     }
     echo $key;
+    exit(0);
+
+```
+
+### Adavanced Sample Read/Write
+
+
+``` php
+<?php
+
+    // class inclusions
+    require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
+
+    // attempt to ready first name
+    $firstName = RequestCache::read('name', 'first');
+    if (is_null($firstName)) {
+
+        // write value; read
+        RequestCache::write('name', 'first', 'oliver');
+        $firstName = RequestCache::read('name', 'first');
+    }
+    echo $firstName;
     exit(0);
 
 ```
