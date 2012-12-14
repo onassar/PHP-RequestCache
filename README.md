@@ -9,8 +9,8 @@ for more robust caching systems.
 
 ### Methods
  - **flush** Clear the request cache
- - **read** Read data from the cache, determined by the key passed in
- - **write** Write data to the cache, identified by the key passed in
+ - **read** Read data from the cache, determined by the key(s) passed in
+ - **write** Write data to the cache, identified by the key(s) passed in
 
 ### Sample Read
 
