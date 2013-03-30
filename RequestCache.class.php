@@ -76,7 +76,7 @@
          */
         public static function getMisses()
         {
-            return self::$_analytics['missed'];
+            return self::$_analytics['misses'];
         }
 
         /**
