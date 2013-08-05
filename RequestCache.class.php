@@ -150,6 +150,51 @@
         }
 
         /**
+         * simpleRead
+         * 
+         * Cleaner read incase cache being used thousands of times (speed
+         * becomes an issues).
+         * 
+         * @access public
+         * @static
+         * @param  string $key
+         * @return mixed cache
+         */
+        public static function simpleRead($key)
+        {
+            if (!isset(self::$_store[$key])) {
+                ++self::$_analytics['misses'];
+                return null;
+            }
+            ++self::$_analytics['reads'];
+            return self::$_store[$key];
+        }
+
+        /**
+         * simpleWrite
+         * 
+         * Cleaner write incase cache being used thousands of times (speed
+         * becomes an issues).
+         * 
+         * @access public
+         * @static
+         * @param  string $key
+         * @param  mixed $value
+         * @return mixed cache
+         */
+        public static function simpleWrite($key, $value)
+        {
+            if ($value === null) {
+                throw new Exception(
+                    'Cannot perform RequestCache write: attempting to store' .
+                    'null value.'
+                );
+            }
+            ++self::$_analytics['writes'];
+            self::$_store[$key] = $value;
+        }
+
+        /**
          * write
          * 
          * Writes a value to the request-level cache, based on the passed in
