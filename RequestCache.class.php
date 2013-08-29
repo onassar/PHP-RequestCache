@@ -37,6 +37,7 @@
          * @access protected
          */
         protected static $_analytics = array(
+            'deletes' => 0,
             'misses' => 0,
             'reads' => 0,
             'writes' => 0
@@ -63,6 +64,18 @@
         public static function flush()
         {
             self::$_store = array();
+        }
+
+        /**
+         * getDeletes
+         * 
+         * @access public
+         * @static
+         * @return integer
+         */
+        public static function getDeletes()
+        {
+            return self::$_analytics['deletes'];
         }
 
         /**
@@ -147,6 +160,22 @@
             // statistic incrementation and value returning
             ++self::$_analytics['reads'];
             return $reference;
+        }
+
+        /**
+         * simpleDelete
+         * 
+         * @access public
+         * @static
+         * @param  string $key
+         * @return void
+         */
+        public static function simpleDelete($key)
+        {
+            if (isset(self::$_store[$key])) {
+                ++self::$_analytics['deletes'];
+                unset(self::$_store[$key]);
+            }
         }
 
         /**
