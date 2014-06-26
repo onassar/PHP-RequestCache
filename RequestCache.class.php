@@ -215,7 +215,7 @@
         {
             if ($value === null) {
                 throw new Exception(
-                    'Cannot perform RequestCache write: attempting to store' .
+                    'Cannot perform RequestCache write: attempting to store ' .
                     'null value.'
                 );
             }
@@ -244,7 +244,7 @@
             // null value attempting to be stored
             if ($value === null) {
                 throw new Exception(
-                    'Cannot perform RequestCache write: attempting to store' .
+                    'Cannot perform RequestCache write: attempting to store ' .
                     'null value.'
                 );
             }
