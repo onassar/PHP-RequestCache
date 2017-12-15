@@ -6,8 +6,8 @@
      * Provides accessors for reading, writing and flushing a request-level
      * cache/data-store.
      * 
-     * @author   Oliver Nassar <onassar@gmail.com>
-     * @todo     implement key prefixing
+     * @author  Oliver Nassar <onassar@gmail.com>
+     * @todo    implement key prefixing
      * @abstract
      * @example
      * <code>
@@ -33,8 +33,8 @@
          * 
          * Cache request/writing statistics array.
          * 
-         * @var    array
-         * @access protected
+         * @var     array
+         * @access  protected
          */
         protected static $_analytics = array(
             'deletes' => 0,
@@ -46,8 +46,8 @@
         /**
          * _store
          * 
-         * @var    array
-         * @access protected
+         * @var     array
+         * @access  protected
          * @static
          */
         protected static $_store = array();
@@ -57,9 +57,9 @@
          * 
          * Empties request-level cache records.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function flush()
         {
@@ -69,9 +69,9 @@
         /**
          * getDeletes
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return integer
+         * @return  integer
          */
         public static function getDeletes()
         {
@@ -83,9 +83,9 @@
          * 
          * Returns the number of request-level missed cache reads.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return integer
+         * @return  integer
          */
         public static function getMisses()
         {
@@ -97,9 +97,9 @@
          * 
          * Returns the number of request-level successful cache reads.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return integer
+         * @return  integer
          */
         public static function getReads()
         {
@@ -112,9 +112,9 @@
          * Returns an associative array of request-level cache performance
          * statistics.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return array
+         * @return  array
          */
         public static function getStats()
         {
@@ -126,9 +126,9 @@
          * 
          * Returns the number of successful request-level cache writes.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return integer
+         * @return  integer
          */
         public static function getWrites()
         {
@@ -141,16 +141,16 @@
          * Attempts to read a request-level cache record, returning null if it
          * couldn't be accessed.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return mixed cache record value, or null if it couldn't be retrieved
+         * @return  mixed cache record value, or null if it couldn't be retrieved
          */
         public static function read()
         {
             $keys = func_get_args();
             $reference = &self::$_store;
             foreach ($keys as $key) {
-                if (!isset($reference[$key])) {
+                if (isset($reference[$key]) === false) {
                     ++self::$_analytics['misses'];
                     return null;
                 }
@@ -165,10 +165,10 @@
         /**
          * simpleDelete
          * 
-         * @access public
+         * @access  public
          * @static
-         * @param  string $key
-         * @return void
+         * @param   string $key
+         * @return  void
          */
         public static function simpleDelete($key)
         {
@@ -184,14 +184,14 @@
          * Cleaner read incase cache being used thousands of times (speed
          * becomes an issues).
          * 
-         * @access public
+         * @access  public
          * @static
-         * @param  string $key
-         * @return mixed cache
+         * @param   string $key
+         * @return  mixed cache
          */
         public static function simpleRead($key)
         {
-            if (!isset(self::$_store[$key])) {
+            if (isset(self::$_store[$key]) === false) {
                 ++self::$_analytics['misses'];
                 return null;
             }
@@ -205,11 +205,11 @@
          * Cleaner write incase cache being used thousands of times (speed
          * becomes an issues).
          * 
-         * @access public
+         * @access  public
          * @static
-         * @param  string $key
-         * @param  mixed $value
-         * @return mixed cache
+         * @param   string $key
+         * @param   mixed $value
+         * @return  mixed cache
          */
         public static function simpleWrite($key, $value)
         {
@@ -229,9 +229,9 @@
          * Writes a value to the request-level cache, based on the passed in
          * key(s).
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function write()
         {
@@ -252,7 +252,7 @@
             // child-keys
             $reference = &self::$_store;
             foreach ($keys as $key) {
-                if (!isset($reference[$key])) {
+                if (isset($reference[$key]) === false) {
                     $reference[$key] = array();
                 }
                 $reference = &$reference[$key];
