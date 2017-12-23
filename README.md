@@ -22,7 +22,7 @@ for more robust caching systems.
 
     // attempt to ready key
     $key = RequestCache::read('key');
-    if (is_null($key)) {
+    if (is_null($key) === true) {
 
         // write value; read
         RequestCache::write('key', 'oliver');
@@ -44,7 +44,7 @@ for more robust caching systems.
 
     // attempt to ready first name
     $firstName = RequestCache::read('name', 'first');
-    if (is_null($firstName)) {
+    if (is_null($firstName) === true) {
 
         // write value; read
         RequestCache::write('name', 'first', 'oliver');

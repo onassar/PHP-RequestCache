@@ -16,7 +16,7 @@
      * 
      *     // attempt to ready key
      *     $key = RequestCache::read('key');
-     *     if (is_null($key)) {
+     *     if (is_null($key) === true) {
      * 
      *         // write value; read
      *         RequestCache::write('key', 'oliver');
