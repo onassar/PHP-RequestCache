@@ -46,7 +46,7 @@
         /**
          * _store
          * 
-         * @var     array
+         * @var     array (default: array())
          * @access  protected
          * @static
          */
@@ -172,7 +172,7 @@
          */
         public static function simpleDelete($key)
         {
-            if (isset(self::$_store[$key])) {
+            if (isset(self::$_store[$key]) === true) {
                 ++self::$_analytics['deletes'];
                 unset(self::$_store[$key]);
             }
