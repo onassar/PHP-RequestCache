@@ -33,8 +33,8 @@
          * 
          * Cache request/writing statistics array.
          * 
-         * @var     array
          * @access  protected
+         * @var     array
          */
         protected static $_analytics = array(
             'deletes' => 0,
@@ -46,8 +46,8 @@
         /**
          * _store
          * 
-         * @var     array (default: array())
          * @access  protected
+         * @var     array (default: array())
          * @static
          */
         protected static $_store = array();
@@ -71,7 +71,7 @@
          * 
          * @access  public
          * @static
-         * @return  integer
+         * @return  int
          */
         public static function getDeletes()
         {
@@ -85,7 +85,7 @@
          * 
          * @access  public
          * @static
-         * @return  integer
+         * @return  int
          */
         public static function getMisses()
         {
@@ -99,7 +99,7 @@
          * 
          * @access  public
          * @static
-         * @return  integer
+         * @return  int
          */
         public static function getReads()
         {
@@ -128,7 +128,7 @@
          * 
          * @access  public
          * @static
-         * @return  integer
+         * @return  int
          */
         public static function getWrites()
         {
