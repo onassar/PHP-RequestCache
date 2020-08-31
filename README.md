@@ -15,42 +15,36 @@ for more robust caching systems.
 ### Simple Sample Read/Write
 
 ``` php
-<?php
+// class inclusions
+require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
 
-    // class inclusions
-    require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
+// attempt to ready key
+$key = RequestCache::read('key');
+if (is_null($key) === true) {
 
-    // attempt to ready key
+    // write value; read
+    RequestCache::write('key', 'oliver');
     $key = RequestCache::read('key');
-    if (is_null($key) === true) {
-
-        // write value; read
-        RequestCache::write('key', 'oliver');
-        $key = RequestCache::read('key');
-    }
-    echo $key;
-    exit(0);
-
+}
+echo $key;
+exit(0);
 ```
 
 ### Adavanced Sample Read/Write
 
 
 ``` php
-<?php
+// class inclusions
+require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
 
-    // class inclusions
-    require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
+// attempt to ready first name
+$firstName = RequestCache::read('name', 'first');
+if (is_null($firstName) === true) {
 
-    // attempt to ready first name
+    // write value; read
+    RequestCache::write('name', 'first', 'oliver');
     $firstName = RequestCache::read('name', 'first');
-    if (is_null($firstName) === true) {
-
-        // write value; read
-        RequestCache::write('name', 'first', 'oliver');
-        $firstName = RequestCache::read('name', 'first');
-    }
-    echo $firstName;
-    exit(0);
-
+}
+echo $firstName;
+exit(0);
 ```
